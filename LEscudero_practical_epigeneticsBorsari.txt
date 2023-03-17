@@ -55,8 +55,7 @@ pwd
 # 3) Biosample: sigmoid_colon and stomach. 
 # The search finds 2 experiments (ATAC-seq in stomach and ATAC-seq in sigmoid colon) from Michael Snyder (Stanford). 
 # Download selected files. The URL within the file.txt downloaded is: 
-# 
-"https://www.encodeproject.org/metadata/?replicates.library.biosample.donor.uuid=d370683e-81e7-473f-8475-7716d027849b&status=released&status=submitted&status=in+progress&assay_slims=DNA+accessibility&assay_title=ATAC-seq&biosample_ontology.term_name=sigmoid+colon&biosample_ontology.term_name=stomach&type=Experiment"
+# "https://www.encodeproject.org/metadata/?replicates.library.biosample.donor.uuid=d370683e-81e7-473f-8475-7716d027849b&status=released&status=submitted&status=in+progress&assay_slims=DNA+accessibility&assay_title=ATAC-seq&biosample_ontology.term_name=sigmoid+colon&biosample_ontology.term_name=stomach&type=Experiment"
 
 
 # within folder /Users/lauraescudero/Terminal/ChIP-seq/epigenomics_uvic/ATAC-seq
@@ -175,19 +174,16 @@ done
 
 
 # Download the file "gencode.v24.protein.coding.non.redundant.TSS.bed" from 
-# 
-https://public-docs.crg.es/rguigo/Data/bborsari/UVIC/epigenomics_course/gencode.v24.protein.coding.non.redundant.TSS.bed
+# https://public-docs.crg.es/rguigo/Data/bborsari/UVIC/epigenomics_course/gencode.v24.protein.coding.non.redundant.TSS.bed
 
-wget 
-https://public-docs.crg.es/rguigo/Data/bborsari/UVIC/epigenomics_course/gencode.v24.protein.coding.non.redundant.TSS.bed
+wget https://public-docs.crg.es/rguigo/Data/bborsari/UVIC/epigenomics_course/gencode.v24.protein.coding.non.redundant.TSS.bed
 
 # Make directory to store it and move file there
 mkdir annotation
 mv gencode.v24.protein.coding.non.redundant.TSS.bed annotation/gencode.v24.protein.coding.non.redundant.TSS.bed
 
 # Retrieve genes with peaks at the promoter region in each tissue (bigBed.peaks.ids.txt = bigBed.ids.txt)
-# bedtools intersect reports overlaps between two feature files (-u: Write the original A entry _once_ if _any_ 
-overlaps found in B.)
+# bedtools intersect reports overlaps between two feature files (-u: Write the original A entry _once_ if _any_ overlaps found in B.)
 # So we want A file to be our file of interest
 
 
@@ -210,7 +206,7 @@ done
 
 
 # Generating files containing the list of genes from the annotation file from which we have an intersect of peaks at 
-promoter regions
+# promoter regions
 # We cut the column 7 that contains the Ensemble gene id, and do sort -u to keep unique gene ids only.
 cut -f-2 analyses/bigBed.ids.txt |\
 while read filename tissue; do 
@@ -232,7 +228,7 @@ wc -l gene.ids.peaks.promoter."$tissue".txt
 done
 
 # There are 15029 and 14830 unique Ensembl gene ids with peaks that intersect promoter regions for stomach and sigmoid 
-colon, respectively.
+# colon, respectively.
 # 15029 gene.ids.peaks.promoter.stomach.txt
 # 14830 gene.ids.peaks.promoter.sigmoid_colon.txt
 
@@ -305,7 +301,7 @@ mkdir regulatory_elements
 # You will get a list of candidate distal regulatory elements for each tissue. How many are they?
 
 # Move into the new directory and create folders to store bigBed data files and peaks analyses)) files (as we did 
-during the ChIP-seq practical)
+# during the ChIP-seq practical)
 cd regulatory_elements
 mkdir analyses data data/bigBed.files analyses/peaks.analysis
 
@@ -442,16 +438,16 @@ less analyses/bigBed.ids.txt
 ls ../ATAC-seq/analyses/peaks.analysis 
 
 # gene.ids.peaks.promoter.sigmoid_colon.txt   peaks.outside.gene.coord.stomach.bed		 
-peaks.promoter.sigmoid_colon.bed
+# peaks.promoter.sigmoid_colon.bed
 # gene.ids.peaks.promoter.stomach.txt	    peaks.outside.protein.coding.gene.sigmoid_colon.bed  
-peaks.promoter.stomach.bed
+# peaks.promoter.stomach.bed
 # peaks.outside.gene.coord.sigmoid_colon.bed  peaks.outside.protein.coding.gene.stomach.bed
 
 # We will use peaks.outside.gene.coord."$tissue".bed 
 
 # Use bedtools intersect; bedtools intersect [OPTIONS] -a <bed/gff/vcf/bam> -b <bed/gff/vcf/bam>; 
 # Note: -b may be followed with multiple databases and/or wildcard (*) character(s).; -u: Write the original A entry 
-_once_ if _any_ overlaps found in B.; 
+#_once_ if _any_ overlaps found in B.; 
 
 
 #For each tissue, we get the open regions with peaks of H3K27ac and H3K4me1 
